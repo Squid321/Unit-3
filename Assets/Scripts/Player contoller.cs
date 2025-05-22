@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class Playercontoller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb; 
     public float jump = 15;
     public bool ground = true;
+    public bool dead = false;
     public float grav = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +23,13 @@ public class Playercontoller : MonoBehaviour
         }
     }
     private void OnCollisionEnter(Collision collision) {
-        ground = true;
+        if (collision.gameObject.CompareTag("Ground")) {
+            ground = true;
+        } 
+        if (collision.gameObject.CompareTag("Obstacle")) {
+            dead = true;
+        }
+        
+
     }
 }
