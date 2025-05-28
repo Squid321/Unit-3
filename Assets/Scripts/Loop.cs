@@ -3,7 +3,7 @@ using UnityEngine;
 public class Loop : MonoBehaviour
 {
     private Vector3 start;
-    public float end;
+    private float end = 57;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

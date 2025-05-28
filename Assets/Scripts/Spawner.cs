@@ -7,27 +7,29 @@ public class Spawner : MonoBehaviour
     public float startDelay;
     public float spawnDelay;
     private int Index;
+    private PlayerController PlayerControllerScript;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InvokeRepeating("Spawn", startDelay, spawnDelay);
+        PlayerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         
     }
 
     // Update is called once per frame
     void Spawn()
     {
-        if (Index == 0) {
-            Index = 1;
+        if (PlayerControllerScript.dead == false) {
+            if (Index == 0) {
+                Index = 1;
+            }
+            if (Index == 5) {
+                Index = 0;
+            }
+            if (Index > 0) {
+                Index = Random.Range(0, Objects.Length);
+            }
+            Instantiate(Objects[Index], spawnpos, Objects[Index].transform.rotation);
         }
-        
-        if (Index == 5) {
-            Index = 0;
-        }
-        if (Index > 0) {
-            Index = Random.Range(0, Objects.Length);
-        }
-        
-        Instantiate(Objects[Index], spawnpos, Objects[Index].transform.rotation);
     }
 }
